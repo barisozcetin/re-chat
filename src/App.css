@@ -1,28 +1,39 @@
-.App {
-  text-align: center;
+.chatroom__container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 1fr;
+  height: 100vh;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.chatroom__navigation {
+  background-color: azure;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.chatroom__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr 1fr;
+  height: 100%;
 }
 
-.App-title {
-  font-size: 1.5em;
+.chatroom__messages {
+  background-color: beige;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
-.App-intro {
-  font-size: large;
+.chatroom__new-message {
+  background-color: lavender;
+  bottom: 0px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.chatroom__form {
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+  grid-gap: 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.chatroom__header {
+  background-color: lightblue;
 }
