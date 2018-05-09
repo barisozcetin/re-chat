@@ -37,3 +37,10 @@
 .chatroom__header {
   background-color: lightblue;
 }
+
+.auth__container {
+  display: grid;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}

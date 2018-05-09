@@ -1,26 +1,37 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Login from "./Login";
-import firebase from "firebase";
-import { firebaseApp } from "../../base";
+import SignUp from "./SignUp";
+import { MainContext } from "../../App";
 
 export class Auth extends Component {
   static propTypes = {};
 
-  authenticate = provider => {
-    const authProvider = new firebase.auth[`${provider}AuthProvider`]();
-    console.log(`${provider}AuthProvider`);
-    firebaseApp
-      .auth()
-      .signInWithPopup(authProvider)
-      .then(this.authHandler);
+  state = {};
+
+  onSignupComplete = () => {
+    this.props.history.push("/login");
+  };
+
+  loginRedirect = () => {
+    this.props.history.push("/room/yenioada/home");
   };
 
   render() {
+    const operation = this.props.match.path;
+    const content =
+      operation === "/login" ? (
+        <Login />
+      ) : (
+        <SignUp onComplete={this.onSignupComplete} />
+      );
+
     return (
-      <div>
-        <Login authenticate={this.authenticate} />
-      </div>
+      <MainContext.Consumer>
+        {context => (
+          <Login onLogin={context.onLogin} loginRedirect={this.loginRedirect} />
+        )}
+      </MainContext.Consumer>
     );
   }
 }

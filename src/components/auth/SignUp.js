@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { firebaseApp } from "../../base";
-import { MainContext } from "../../App";
-import { Link } from "react-router-dom";
 
-class Login extends Component {
-  static propTypes = {};
+class SignUp extends Component {
+  static propTypes = {
+    onComplete: PropTypes.func.isRequired
+  };
 
   state = {
     email: "",
@@ -13,14 +13,14 @@ class Login extends Component {
     method: "email"
   };
 
-  onLogin = e => {
+  onSignUp = e => {
     e.preventDefault();
     const { email, password } = this.state;
     firebaseApp
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then(user => {
-        this.props.onLogin(user.email);
+        this.props.onComplete();
       });
   };
   changeMethod = () => {
@@ -37,7 +37,7 @@ class Login extends Component {
 
   render() {
     const loginWithEmail = (
-      <form onSubmit={this.onLogin}>
+      <form onSubmit={this.onSignUp}>
         <div className="field">
           <div className="control has-icons-left has-icons-right">
             <input
@@ -90,12 +90,11 @@ class Login extends Component {
     );
     return (
       <div className="login">
-        <h2>Login</h2>
+        <h2>Sign Up</h2>
         {loginWithEmail}
-        <button onClick={this.props.loginRedirect}>Redirect</button>
       </div>
     );
   }
 }
 
-export default Login;
+export default SignUp;
