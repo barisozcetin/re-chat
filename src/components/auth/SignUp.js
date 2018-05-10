@@ -1,26 +1,50 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { firebaseApp } from "../../base";
+import { withRouter, Link } from "react-router-dom";
 
 class SignUp extends Component {
-  static propTypes = {
-    onComplete: PropTypes.func.isRequired
-  };
+  static propTypes = {};
 
   state = {
     email: "",
     password: "",
-    method: "email"
+    password2: "",
+    method: "email",
+    errors: {}
   };
+
+  shouldComponentUpdate() {
+    return true;
+  }
 
   onSignUp = e => {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, password2, errors } = this.state;
+    if (password !== password2) {
+      this.setState({
+        errors: { ...errors, password2: "Passwords should match" }
+      });
+      return false;
+    }
+    this.setState({ errors: {} });
     firebaseApp
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        this.props.onComplete();
+      .then(() => {
+        this.props.history.push("/login");
+      })
+      .catch(error => {
+        if (error.code.includes("password")) {
+          this.setState({
+            errors: { ...errors, password: error.message }
+          });
+        }
+        if (error.code.includes("email")) {
+          this.setState({
+            errors: { ...errors, email: error.message }
+          });
+        }
       });
   };
   changeMethod = () => {
@@ -36,6 +60,7 @@ class SignUp extends Component {
   };
 
   render() {
+    const { errors } = this.state;
     const loginWithEmail = (
       <form onSubmit={this.onSignUp}>
         <div className="field">
@@ -56,6 +81,7 @@ class SignUp extends Component {
               <i className="fas fa-check" />
             </span>
           </div>
+          {errors.email && <p className="help is-danger">{errors.email}</p>}
         </div>
 
         <div className="field">
@@ -73,10 +99,36 @@ class SignUp extends Component {
               <i className="fas fa-lock" />
             </span>
           </p>
+          {errors.password && (
+            <p className="help is-danger">{errors.password}</p>
+          )}
+        </div>
+        <div className="field">
+          <p className="control has-icons-left">
+            <input
+              className="input"
+              type="password"
+              placeholder="Confirm Password"
+              id="password2"
+              value={this.state.password2}
+              onChange={this.onInputChange}
+              name="password2"
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock" />
+            </span>
+          </p>
+          {errors.password2 && (
+            <p className="help is-danger">{errors.password2}</p>
+          )}
         </div>
         <div className="field">
           <p className="control">
-            <input type="submit" className="button is-success" value="Login" />
+            <input
+              type="submit"
+              className="button is-success full-width"
+              value="Sign Up"
+            />
           </p>
         </div>
       </form>
@@ -89,12 +141,15 @@ class SignUp extends Component {
       </form>
     );
     return (
-      <div className="login">
-        <h2>Sign Up</h2>
+      <div className="login__container p-3 box">
+        <h2 className="title has-text-centered mb-2">Sign Up</h2>
         {loginWithEmail}
+        <p className="m-a">
+          Already have an account? <Link to="/login"> Click to login</Link>
+        </p>
       </div>
     );
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { firebaseApp } from "../../base";
 import { MainContext } from "../../App";
-import { Link } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 
 class Login extends Component {
   static propTypes = {};
@@ -20,7 +20,8 @@ class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(user => {
-        this.props.onLogin(user.email);
+        // this.props.onLogin(user.email);
+        //this.props.navigation.goBack();
       });
   };
   changeMethod = () => {
@@ -76,7 +77,11 @@ class Login extends Component {
         </div>
         <div className="field">
           <p className="control">
-            <input type="submit" className="button is-success" value="Login" />
+            <input
+              type="submit"
+              className="button is-success full-width"
+              value="Login"
+            />
           </p>
         </div>
       </form>
@@ -89,13 +94,23 @@ class Login extends Component {
       </form>
     );
     return (
-      <div className="login">
-        <h2>Login</h2>
+      <div className="login__container p-3 box">
+        <h2 className="title has-text-centered mb-2">Login with</h2>
+        <div className="field is-grouped is-grouped-centered mb-3">
+          <p className="control">
+            <a className="button is-large is-light">Facebook</a>
+          </p>
+          <p className="control">
+            <a className="button is-large is-light">Google</a>
+          </p>
+        </div>
         {loginWithEmail}
-        <button onClick={this.props.loginRedirect}>Redirect</button>
+        <p className="m-a">
+          Not a member? <NavLink to="/signup">Sign Up</NavLink>
+        </p>
       </div>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);
