@@ -9,7 +9,8 @@ export class ChatRoom extends Component {
     channels: [],
     activeChannel: "home",
     messages: [],
-    newMessage: ""
+    newMessage: "",
+    sidebarExpanded: false
   };
 
   componentDidMount() {
@@ -62,6 +63,12 @@ export class ChatRoom extends Component {
     }
   };
 
+  toggleSidebarOnMobile = e => {
+    this.setState(prevState => ({
+      sidebarExpanded: !prevState.sidebarExpanded
+    }));
+  };
+
   render() {
     return (
       <div className="chatroom__container">
@@ -69,6 +76,7 @@ export class ChatRoom extends Component {
           channels={this.state.channels}
           onCreateChannel={this.onCreateChannel}
           roomId={this.state.roomId}
+          ariaExpanded={this.state.sidebarExpanded}
         />
         <MainSection
           messages={this.state.messages}
@@ -76,6 +84,7 @@ export class ChatRoom extends Component {
           newMessage={this.state.newMessage}
           onMessageChange={this.onMessageChange}
           onMessageSubmit={this.onMessageSubmit}
+          onToggle={this.toggleSidebarOnMobile}
         />
       </div>
     );

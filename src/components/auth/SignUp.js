@@ -15,10 +15,6 @@ class SignUp extends Component {
     errors: {}
   };
 
-  shouldComponentUpdate() {
-    return true;
-  }
-
   onSignUp = e => {
     e.preventDefault();
     const { email, password, password2, errors } = this.state;

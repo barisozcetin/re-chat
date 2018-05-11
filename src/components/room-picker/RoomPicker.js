@@ -3,10 +3,13 @@ import { firebaseApp } from "../../base";
 import base from "../../base";
 import { Link, NavLink, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
+import Navbar from "../navigation/Navbar";
 
 export class RoomPicker extends Component {
   state = {
     channel: "",
+    newChannel: "",
+    channelType: "public",
     errors: {}
   };
   onSubmit = e => {
@@ -19,6 +22,10 @@ export class RoomPicker extends Component {
 
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onOptionChange = e => {
+    this.setState({ channelType: e.target.value });
   };
 
   onJoin = e => {
@@ -48,8 +55,9 @@ export class RoomPicker extends Component {
   render() {
     return (
       <div className="container picker__container box">
-        <div className="join">
-          <h2>Join a channel</h2>
+        <Navbar />
+        <section className="picker__section join as-c">
+          <h2 className="is-size-4 mb-1 has-text-centered">Join a channel</h2>
           <form onSubmit={this.onJoin} className="form-flex">
             <TextFieldGroup
               name="channel"
@@ -57,15 +65,19 @@ export class RoomPicker extends Component {
               onChange={this.onInputChange}
               value={this.state.channel}
               type="text"
-              icon="fa-envelope"
+              icon="fa-comments"
               error={this.state.errors.joinChannel}
             />
 
-            <input type="submit" value="Connect" />
+            <input
+              type="submit"
+              value="Connect"
+              className="button is-primary"
+            />
           </form>
-        </div>
-        <div className="create">
-          <h2>Crete a channel</h2>
+        </section>
+        <section className="picker__section create as-c">
+          <h2 className="is-size-4 mb-1 has-text-centered">Crete a channel</h2>
           <form className="form-flex">
             <TextFieldGroup
               name="channel"
@@ -73,12 +85,32 @@ export class RoomPicker extends Component {
               onChange={this.onInputChange}
               value={this.state.channel}
               type="text"
-              icon="fa-envelope"
+              icon="fa-comments"
             />
-            <input type="checkbox" name="" id="" />
-            <input type="submit" value="Create" />
+            <div className="field is-narrow">
+              <div className="control" onChange={this.onOptionChange}>
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="member"
+                    value="public"
+                    defaultChecked
+                  />{" "}
+                  Public
+                </label>
+                <label className="radio">
+                  <input type="radio" name="member" value="private" /> Private
+                </label>
+              </div>
+              <p className="help">
+                {this.state.channelType === "public"
+                  ? "Everybody can join the room"
+                  : "Only invited people can join"}
+              </p>
+            </div>
+            <input type="submit" value="Create" className="button is-primary" />
           </form>
-        </div>
+        </section>
       </div>
     );
   }
