@@ -20,7 +20,11 @@ const Router = () => (
             component={ChatRoom}
             isAuthenticated={context.state.isAuthenticated}
           />
-          <Route path="/room/:roomId" component={ChatRoom} />
+          <PrivateRoute
+            path="/room/:roomId/"
+            component={ChatRoom}
+            isAuthenticated={context.state.isAuthenticated}
+          />
           <Route path="/test" component={RoomPicker} />
           <Auth>
             <Route path="/login" exact component={Login} />

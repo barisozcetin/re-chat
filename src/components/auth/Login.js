@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { firebaseApp } from "../../base";
 import { MainContext } from "../../App";
 import { Link, NavLink, withRouter } from "react-router-dom";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 class Login extends Component {
   static propTypes = {};
@@ -10,18 +11,32 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    method: "email"
+    method: "email",
+    errors: {}
   };
 
   onLogin = e => {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, errors } = this.state;
+    this.setState({ errors: {} });
     firebaseApp
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(user => {
         // this.props.onLogin(user.email);
         //this.props.navigation.goBack();
+      })
+      .catch(error => {
+        if (error.code.includes("password")) {
+          this.setState({
+            errors: { ...errors, password: error.message }
+          });
+        }
+        if (error.code.includes("email")) {
+          this.setState({
+            errors: { ...errors, email: error.message }
+          });
+        }
       });
   };
   changeMethod = () => {
@@ -37,44 +52,27 @@ class Login extends Component {
   };
 
   render() {
+    const { email, password, errors } = this.state;
     const loginWithEmail = (
       <form onSubmit={this.onLogin}>
-        <div className="field">
-          <div className="control has-icons-left has-icons-right">
-            <input
-              className="input"
-              type="email"
-              placeholder="example@mail.com"
-              name="email"
-              id="email"
-              onChange={this.onInputChange}
-              value={this.state.email}
-            />
-            <span className="icon is-left">
-              <i className="fas fa-envelope" />
-            </span>
-            <span className="icon is-right">
-              <i className="fas fa-check" />
-            </span>
-          </div>
-        </div>
-
-        <div className="field">
-          <p className="control has-icons-left">
-            <input
-              className="input"
-              type="password"
-              placeholder="Password"
-              id="password"
-              value={this.state.password}
-              onChange={this.onInputChange}
-              name="password"
-            />
-            <span className="icon is-small is-left">
-              <i className="fas fa-lock" />
-            </span>
-          </p>
-        </div>
+        <TextFieldGroup
+          name="email"
+          placeholder="example@mail.com"
+          onChange={this.onInputChange}
+          value={email}
+          type="email"
+          error={errors.email}
+          icon="fa-envelope"
+        />
+        <TextFieldGroup
+          name="password"
+          placeholder="Password"
+          onChange={this.onInputChange}
+          value={password}
+          type="password"
+          error={errors.password}
+          icon="fa-lock"
+        />
         <div className="field">
           <p className="control">
             <input
@@ -98,10 +96,19 @@ class Login extends Component {
         <h2 className="title has-text-centered mb-2">Login with</h2>
         <div className="field is-grouped is-grouped-centered mb-3">
           <p className="control">
-            <a className="button is-large is-light">Facebook</a>
+            <a className="button is-large is-light">
+              <i className="fab fa-facebook-square" />
+            </a>
           </p>
           <p className="control">
-            <a className="button is-large is-light">Google</a>
+            <a className="button is-large is-light">
+              <i className="fab fa-google" />
+            </a>
+          </p>
+          <p className="control">
+            <a className="button is-large is-light">
+              <i className="fas fa-phone" />
+            </a>
           </p>
         </div>
         {loginWithEmail}

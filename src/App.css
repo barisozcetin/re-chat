@@ -52,6 +52,18 @@
   height: 500px;
 }
 
+.picker__container {
+  display: grid;
+  height: 500px;
+  grid-template-columns: 300px 300px;
+  grid-gap: 50px;
+}
+
+.form-flex {
+  display: flex;
+  flex-direction: column;
+}
+
 /* HELPERS */
 
 .m-a {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { firebaseApp } from "../../base";
 import { withRouter, Link } from "react-router-dom";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 class SignUp extends Component {
   static propTypes = {};
@@ -60,68 +61,36 @@ class SignUp extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, email, password, password2 } = this.state;
     const loginWithEmail = (
       <form onSubmit={this.onSignUp}>
-        <div className="field">
-          <div className="control has-icons-left has-icons-right">
-            <input
-              className="input"
-              type="email"
-              placeholder="example@mail.com"
-              name="email"
-              id="email"
-              onChange={this.onInputChange}
-              value={this.state.email}
-            />
-            <span className="icon is-left">
-              <i className="fas fa-envelope" />
-            </span>
-            <span className="icon is-right">
-              <i className="fas fa-check" />
-            </span>
-          </div>
-          {errors.email && <p className="help is-danger">{errors.email}</p>}
-        </div>
-
-        <div className="field">
-          <p className="control has-icons-left">
-            <input
-              className="input"
-              type="password"
-              placeholder="Password"
-              id="password"
-              value={this.state.password}
-              onChange={this.onInputChange}
-              name="password"
-            />
-            <span className="icon is-small is-left">
-              <i className="fas fa-lock" />
-            </span>
-          </p>
-          {errors.password && (
-            <p className="help is-danger">{errors.password}</p>
-          )}
-        </div>
-        <div className="field">
-          <p className="control has-icons-left">
-            <input
-              className="input"
-              type="password"
-              placeholder="Confirm Password"
-              id="password2"
-              value={this.state.password2}
-              onChange={this.onInputChange}
-              name="password2"
-            />
-            <span className="icon is-small is-left">
-              <i className="fas fa-lock" />
-            </span>
-          </p>
-          {errors.password2 && (
-            <p className="help is-danger">{errors.password2}</p>
-          )}
-        </div>
+        <TextFieldGroup
+          name="email"
+          placeholder="example@mail.com"
+          onChange={this.onInputChange}
+          value={email}
+          type="email"
+          error={errors.email}
+          icon="fa-envelope"
+        />
+        <TextFieldGroup
+          name="password"
+          placeholder="Password"
+          onChange={this.onInputChange}
+          value={password}
+          type="password"
+          error={errors.password}
+          icon="fa-lock"
+        />
+        <TextFieldGroup
+          name="password2"
+          placeholder="Confirm Password"
+          onChange={this.onInputChange}
+          value={password2}
+          type="password"
+          error={errors.password2}
+          icon="fa-lock"
+        />
         <div className="field">
           <p className="control">
             <input
