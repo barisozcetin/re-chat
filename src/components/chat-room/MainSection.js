@@ -4,7 +4,7 @@ import ChatroomHeader from "./ChatroomHeader";
 
 const MainSection = props => {
   return (
-    <main className="chatroom__main">
+    <div className="chatroom__main">
       <ChatroomHeader roomId={props.roomId} onToggle={props.onToggle} />
       <div className="chatroom__messages" id="messages">
         <ul>
@@ -44,7 +44,7 @@ const MainSection = props => {
             ))}
         </ul>
       </div>
-      <div className="chatroom__new-message">
+      <div className="chatroom__new-message field is-grouped">
         <form
           className="chatroom__form"
           onSubmit={e => {
@@ -52,16 +52,17 @@ const MainSection = props => {
             props.onMessageSubmit();
           }}
         >
-          <input
+          <textarea
             type="text"
-            className="chatroom__text-area"
+            className="textarea"
+            rows="3"
             value={props.newMessage}
             onChange={props.onMessageChange}
           />
           <input type="submit" value="Send" className="button is-primary" />
         </form>
       </div>
-    </main>
+    </div>
   );
 };
 

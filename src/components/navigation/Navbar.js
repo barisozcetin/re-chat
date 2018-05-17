@@ -1,10 +1,30 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class Navbar extends Component {
-  static propTypes = {};
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+    signOut: PropTypes.func
+  };
 
   render() {
+    const authItems = (
+      <button className="bd-tw-button button" onClick={this.props.signOut}>
+        <span className="icon">
+          <i className="fas fa-sign-out-alt" />
+        </span>
+        <span>Sign Out</span>
+      </button>
+    );
+    const guestItems = (
+      <button className="bd-tw-button button" onClick={this.props.toggleModal}>
+        <span className="icon">
+          <i className="fas fa-sign-in-alt" />
+        </span>
+        <span>Sign In / Register</span>
+      </button>
+    );
     return (
       <nav className="navbar navbar__margin is-transparent">
         <div className="navbar-brand">
@@ -42,43 +62,6 @@ class Navbar extends Component {
                 >
                   Overview
                 </a>
-                <a
-                  className="navbar-item"
-                  href="https://bulma.io/documentation/modifiers/syntax/"
-                >
-                  Modifiers
-                </a>
-                <a
-                  className="navbar-item"
-                  href="https://bulma.io/documentation/columns/basics/"
-                >
-                  Columns
-                </a>
-                <a
-                  className="navbar-item"
-                  href="https://bulma.io/documentation/layout/container/"
-                >
-                  Layout
-                </a>
-                <a
-                  className="navbar-item"
-                  href="https://bulma.io/documentation/form/general/"
-                >
-                  Form
-                </a>
-                <hr className="navbar-divider" />
-                <a
-                  className="navbar-item"
-                  href="https://bulma.io/documentation/elements/box/"
-                >
-                  Elements
-                </a>
-                <a
-                  className="navbar-item is-active"
-                  href="https://bulma.io/documentation/components/breadcrumb/"
-                >
-                  Components
-                </a>
               </div>
             </div>
           </div>
@@ -108,6 +91,9 @@ class Navbar extends Component {
                     </span>
                     <span>Download</span>
                   </a>
+                </p>
+                <p className="control">
+                  {this.props.isAuthenticated ? authItems : guestItems}
                 </p>
               </div>
             </div>

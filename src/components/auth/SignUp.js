@@ -5,7 +5,10 @@ import { withRouter, Link } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 
 class SignUp extends Component {
-  static propTypes = {};
+  static propTypes = {
+    isModal: PropTypes.bool,
+    switchComponent: PropTypes.func
+  };
 
   state = {
     email: "",
@@ -110,7 +113,12 @@ class SignUp extends Component {
         <h2 className="title has-text-centered mb-2">Sign Up</h2>
         {loginWithEmail}
         <p className="m-a">
-          Already have an account? <Link to="/login"> Click to login</Link>
+          Already have an account?{" "}
+          {this.props.isModal ? (
+            <a onClick={this.props.switchComponent}>Login</a>
+          ) : (
+            <Link to="/signup">Login</Link>
+          )}
         </p>
       </div>
     );

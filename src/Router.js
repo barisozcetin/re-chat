@@ -14,7 +14,17 @@ const Router = () => (
     {context => (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={RoomPicker} />
+          <Route
+            path="/"
+            exact
+            render={props => (
+              <RoomPicker
+                {...props}
+                isAuthenticated={context.state.isAuthenticated}
+                signOut={context.signOut}
+              />
+            )}
+          />
           <PrivateRoute
             path="/room/:roomId/:channelId"
             component={ChatRoom}
@@ -24,6 +34,7 @@ const Router = () => (
             path="/room/:roomId/"
             component={ChatRoom}
             isAuthenticated={context.state.isAuthenticated}
+            signOut={context.signOut}
           />
           <Route path="/test" component={RoomPicker} />
           <Auth>

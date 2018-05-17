@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import InputWithButton from "../common/InputWithButton";
+import InviteModal from "./InviteModal";
 
 export class SideBar extends Component {
   state = {
     newchannel: "",
     filter: "",
-    filteredChannels: []
+    filteredChannels: [],
+    modalActive: false
   };
   static propTypes = {
     channels: PropTypes.array.isRequired
@@ -49,6 +51,10 @@ export class SideBar extends Component {
     e.preventDefault();
     this.props.onCreateChannel(this.state.newChannel);
     this.setState({ newChannel: "" });
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({ modalActive: !prevState.modalActive }));
   };
 
   render() {
@@ -100,8 +106,21 @@ export class SideBar extends Component {
               />
             </form>
           </div>
+          <br />
+          <div className="share">
+            <button
+              className="button is-transparent"
+              onClick={this.toggleModal}
+            >
+              Share <i className="fas fa-share" />
+            </button>
+          </div>
         </aside>
-        <div id="channels" className="channels" />
+        <InviteModal
+          roomId={roomId}
+          isActive={this.state.modalActive}
+          onClose={this.toggleModal}
+        />
       </nav>
     );
   }

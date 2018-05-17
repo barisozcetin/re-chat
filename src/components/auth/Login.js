@@ -2,11 +2,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { firebaseApp } from "../../base";
 import { MainContext } from "../../App";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 
 class Login extends Component {
-  static propTypes = {};
+  static propTypes = {
+    isModal: PropTypes.bool,
+    switchComponent: PropTypes.func
+  };
+
+  static defaultProps = {
+    isModal: false
+  };
 
   state = {
     email: "",
@@ -113,7 +120,12 @@ class Login extends Component {
         </div>
         {loginWithEmail}
         <p className="m-a">
-          Not a member? <NavLink to="/signup">Sign Up</NavLink>
+          Not a member?{" "}
+          {this.props.isModal ? (
+            <a onClick={this.props.switchComponent}>Sign Up</a>
+          ) : (
+            <Link to="/signup">Sign Up</Link>
+          )}
         </p>
       </div>
     );

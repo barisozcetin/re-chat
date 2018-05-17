@@ -15,6 +15,18 @@ class MainProvider extends Component {
     this.setState({ isAuthenticated: true, user });
   };
 
+  signOut = () => {
+    firebaseApp
+      .auth()
+      .signOut()
+      .then(() =>
+        this.setState({
+          isAuthenticated: false,
+          user: ""
+        })
+      );
+  };
+
   componentDidMount() {
     this.removeListener = firebaseApp.auth().onAuthStateChanged(user => {
       if (user) {
@@ -36,7 +48,8 @@ class MainProvider extends Component {
       <MainContext.Provider
         value={{
           state: this.state,
-          onLogin: this.onLogin
+          onLogin: this.onLogin,
+          signOut: this.signOut
         }}
       >
         {this.props.children}
