@@ -23,7 +23,7 @@ export class ChatRoom extends Component {
       // TODO: MAKE A CHANNEL CONTROL. IF NOT REDIRECT TO HOME
       this.setState({ activeChannel: this.props.match.params.channelId });
     }
-    this.scrollToBottom;
+    this.scrollToBottom();
   }
 
   syncMessages = () => {

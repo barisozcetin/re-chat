@@ -18,7 +18,7 @@ const MainSection = props => {
                         <figure className="image is-48x48">
                           <img
                             src="https://bulma.io/images/placeholders/96x96.png"
-                            alt="Placeholder image"
+                            alt="Placeholder"
                           />
                         </figure>
                       </div>
@@ -33,7 +33,8 @@ const MainSection = props => {
 
                         <div className="message-text">
                           {msg} <a>@bulmaio</a>.
-                          <a href="#">#css</a> <a href="#">#responsive</a>
+                          <a href="www.barisozcetin.me">#css</a>{" "}
+                          <a href="www.barisozcetin.me">#responsive</a>
                           <br />
                         </div>
                       </div>

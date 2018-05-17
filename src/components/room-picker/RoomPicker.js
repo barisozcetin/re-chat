@@ -39,6 +39,7 @@ export class RoomPicker extends Component {
   onJoin = e => {
     e.preventDefault();
     const { history } = this.props;
+    if (!this.state.channel || this.state.channel.length === 0) return false;
     base
       .fetch(`channels/${this.state.channel}`, {
         context: this,
@@ -62,9 +63,9 @@ export class RoomPicker extends Component {
                     .fetch(`config/${this.state.channel}/password`, {})
                     .then(pw => {
                       // IF PASSWORD CORRECT
-                      if (pw == this.state.password) {
+                      if (pw.toString() === this.state.password) {
                         const channelLink = `/room/${this.state.channel}`;
-                        this.props.history.push(channelLink);
+                        history.push(channelLink);
                       } else {
                         this.setState({
                           errors: {
@@ -84,7 +85,7 @@ export class RoomPicker extends Component {
                 }
               } else {
                 const channelLink = `/room/${this.state.channel}`;
-                this.props.history.push(channelLink);
+                history.push(channelLink);
               }
             });
         } else {
@@ -135,6 +136,7 @@ export class RoomPicker extends Component {
               type="submit"
               value="Connect"
               className="button is-primary"
+              disabled={!this.state.channel.length}
             />
           </form>
         </section>
