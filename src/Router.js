@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ChatRoom from "./components/chat-room/ChatRoom";
-import RoomPicker from "./components/room-picker/RoomPicker";
+import RoomMain from "./components/room-picker/RoomMain";
 import Auth from "./components/auth/Auth";
 import SignUp from "./components/auth/SignUp";
 import Login from "./components/auth/Login";
@@ -18,7 +18,7 @@ const Router = () => (
             path="/"
             exact
             render={props => (
-              <RoomPicker
+              <RoomMain
                 {...props}
                 isAuthenticated={context.state.isAuthenticated}
                 signOut={context.signOut}
@@ -36,7 +36,6 @@ const Router = () => (
             isAuthenticated={context.state.isAuthenticated}
             signOut={context.signOut}
           />
-          <Route path="/test" component={RoomPicker} />
           <Auth>
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={SignUp} />

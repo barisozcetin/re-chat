@@ -17,7 +17,11 @@ export class inviteModal extends Component {
         <div className="modal-background" onClick={this.props.onClose} />
         <div className="modal-content">
           {this.state.component === "login" ? (
-            <Login isModal={true} switchComponent={this.switchComponent} />
+            <Login
+              isModal={true}
+              switchComponent={this.switchComponent}
+              onSuccess={this.props.onSuccess}
+            />
           ) : (
             <SignUp isModal={true} switchComponent={this.switchComponent} />
           )}

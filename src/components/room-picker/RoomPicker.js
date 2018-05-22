@@ -4,7 +4,7 @@ import base from "../../base";
 import { Link, NavLink, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import Navbar from "../navigation/Navbar";
-import AuthModal from "../auth/AuthModal";
+import RoomCreate from "./RoomCreate";
 
 export class RoomPicker extends Component {
   state = {
@@ -13,15 +13,10 @@ export class RoomPicker extends Component {
     channelType: "public",
     errors: {},
     password: "",
-    privateRoom: false,
-    modalActive: false
+    privateRoom: false
   };
   onSubmit = e => {
     e.preventDefault();
-  };
-
-  logOut = () => {
-    firebaseApp.auth().signOut();
   };
 
   onInputChange = e => {
@@ -30,10 +25,6 @@ export class RoomPicker extends Component {
 
   onOptionChange = e => {
     this.setState({ channelType: e.target.value });
-  };
-
-  onModalToggle = () => {
-    this.setState(prevState => ({ modalActive: !prevState.modalActive }));
   };
 
   onJoin = e => {
@@ -113,73 +104,27 @@ export class RoomPicker extends Component {
       />
     );
     return (
-      <div className="container picker__container box">
-        <Navbar
-          isAuthenticated={this.props.isAuthenticated}
-          signOut={this.props.signOut}
-          toggleModal={this.onModalToggle}
-        />
-        <section className="picker__section join as-c">
-          <h2 className="is-size-4 mb-1 has-text-centered">Join a channel</h2>
-          <form onSubmit={this.onJoin} className="form-flex">
-            <TextFieldGroup
-              name="channel"
-              placeholder="Channel Name"
-              onChange={this.onInputChange}
-              value={this.state.channel}
-              type="text"
-              icon="fa-comments"
-              error={this.state.errors.joinChannel}
-            />
-            {this.state.errors.private && passwordField}
-            <input
-              type="submit"
-              value="Connect"
-              className="button is-primary"
-              disabled={!this.state.channel.length}
-            />
-          </form>
-        </section>
-        <section className="picker__section create as-c">
-          <h2 className="is-size-4 mb-1 has-text-centered">Crete a channel</h2>
-          <form className="form-flex">
-            <TextFieldGroup
-              name="channel"
-              placeholder="Channel Name"
-              onChange={this.onInputChange}
-              value={this.state.channel}
-              type="text"
-              icon="fa-comments"
-            />
-            <div className="field is-narrow">
-              <div className="control" onChange={this.onOptionChange}>
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="member"
-                    value="public"
-                    defaultChecked
-                  />{" "}
-                  Public
-                </label>
-                <label className="radio">
-                  <input type="radio" name="member" value="private" /> Private
-                </label>
-              </div>
-              <p className="help">
-                {this.state.channelType === "public"
-                  ? "Everybody can join the room"
-                  : "Only invited people can join"}
-              </p>
-            </div>
-            <input type="submit" value="Create" className="button is-primary" />
-          </form>
-        </section>
-        <AuthModal
-          isActive={this.state.modalActive}
-          onClose={this.onModalToggle}
-        />
-      </div>
+      <section className="picker__section join as-c">
+        <h2 className="is-size-4 mb-1 has-text-centered">Join a channel</h2>
+        <form onSubmit={this.onJoin} className="form-flex">
+          <TextFieldGroup
+            name="channel"
+            placeholder="Channel Name"
+            onChange={this.onInputChange}
+            value={this.state.channel}
+            type="text"
+            icon="fa-comments"
+            error={this.state.errors.joinChannel}
+          />
+          {this.state.errors.private && passwordField}
+          <input
+            type="submit"
+            value="Connect"
+            className="button is-primary"
+            disabled={!this.state.channel.length}
+          />
+        </form>
+      </section>
     );
   }
 }

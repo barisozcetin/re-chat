@@ -8,7 +8,8 @@ import TextFieldGroup from "../common/TextFieldGroup";
 class Login extends Component {
   static propTypes = {
     isModal: PropTypes.bool,
-    switchComponent: PropTypes.func
+    switchComponent: PropTypes.func,
+    onSuccess: PropTypes.func
   };
 
   static defaultProps = {
@@ -32,14 +33,18 @@ class Login extends Component {
       .then(user => {
         // this.props.onLogin(user.email);
         //this.props.navigation.goBack();
+        // if it's modal, close it
+        if (this.props.isModal) {
+          this.props.onSuccess();
+        }
       })
       .catch(error => {
-        if (error.code.includes("password")) {
+        if (error.code && error.code.includes("password")) {
           this.setState({
             errors: { ...errors, password: error.message }
           });
         }
-        if (error.code.includes("email")) {
+        if (error.code && error.code.includes("email")) {
           this.setState({
             errors: { ...errors, email: error.message }
           });
