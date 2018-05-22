@@ -206,6 +206,10 @@ html {
   padding: 3rem;
 }
 
+.pb-1 {
+  padding-bottom: 1rem;
+}
+
 .prl-1 {
   padding: 1rem;
 }
