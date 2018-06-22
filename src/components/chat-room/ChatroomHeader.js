@@ -27,10 +27,13 @@ const ChatroomHeader = props => {
           </a>
         </div>
 
-        <div id="navbarExampleTransparentExample" className="navbar-menu">
-          <div className="navbar-start">
+        <div
+          id="navbarExampleTransparentExample"
+          className="navbar-menu justify-content-center"
+        >
+          <div className="navbar-start ml-auto">
             {" "}
-            <Link className="navbar-item" to="/">
+            <Link className="navbar-item bold" to="/">
               {props.roomId}
             </Link>
           </div>

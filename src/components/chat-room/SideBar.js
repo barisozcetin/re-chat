@@ -4,13 +4,15 @@ import { NavLink } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import InputWithButton from "../common/InputWithButton";
 import ShareModal from "./ShareModal";
+import InviteModal from "./InviteModal";
 
 export class SideBar extends Component {
   state = {
     newChannel: "",
     filter: "",
     filteredChannels: [],
-    modalActive: false
+    shareModalActive: false,
+    inviteModalActive: false
   };
   static propTypes = {
     channels: PropTypes.array.isRequired
@@ -54,8 +56,17 @@ export class SideBar extends Component {
     this.setState({ newChannel: "" });
   };
 
-  toggleModal = () => {
-    this.setState(prevState => ({ modalActive: !prevState.modalActive }));
+  toggleModal = modalName => {
+    const action =
+      modalName === "shareModal" ? "shareModalActive" : "inviteModalActive";
+    console.log(action);
+    this.setState(prevState => ({
+      [action]: !prevState[action]
+    }));
+  };
+
+  allowUser = () => {
+    this.props.onAddAllowedUser("baris@hotmail.com");
   };
 
   render() {
@@ -74,7 +85,7 @@ export class SideBar extends Component {
           </header>
         </div>
         <aside className="menu mt-2 prl-1">
-          <p className="menu-label is-size-5">Channels</p>
+          <p className="menu-label is-size-5 text-center">Channels</p>
           <TextFieldGroup
             name="filter"
             placeholder="Find a channel"
@@ -95,7 +106,7 @@ export class SideBar extends Component {
                 </li>
               ))}
           </ul>
-          <div className="">
+          <div className="mt-1">
             <form onSubmit={this.createChannel}>
               <InputWithButton
                 placeholder="Channel name"
@@ -111,7 +122,7 @@ export class SideBar extends Component {
           <div className="share">
             <button
               className="button is-transparent"
-              onClick={this.toggleModal}
+              onClick={() => this.toggleModal("shareModal")}
             >
               <span>Share</span>
               <span className="icon is-small">
@@ -120,7 +131,7 @@ export class SideBar extends Component {
             </button>
             <button
               className="button is-transparent"
-              onClick={this.toggleModal}
+              onClick={() => this.toggleModal("inviteModal")}
             >
               <span>Invite</span>
               <span className="icon is-small">
@@ -131,8 +142,13 @@ export class SideBar extends Component {
         </aside>
         <ShareModal
           roomId={roomId}
-          isActive={this.state.modalActive}
-          onClose={this.toggleModal}
+          isActive={this.state.shareModalActive}
+          onClose={() => this.toggleModal("shareModal")}
+        />
+        <InviteModal
+          roomId={roomId}
+          isActive={this.state.inviteModalActive}
+          onClose={() => this.toggleModal("inviteModal")}
         />
       </nav>
     );

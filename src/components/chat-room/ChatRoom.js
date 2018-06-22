@@ -11,14 +11,16 @@ export class ChatRoom extends Component {
     messages: [],
     newMessage: "",
     sidebarExpanded: false,
-    isPrivate: false
+    isPrivate: false,
+    allowedUsers: []
   };
 
   componentDidUpdate(prevProps) {
     if (
       this.props.match.params.channelId !== prevProps.match.params.channelId
     ) {
-      this.syncMessages();
+      base.removeBinding(this.syncRef);
+      this.syncRef = this.syncMessages(this.props.match.params.channelId);
     }
   }
 
@@ -34,35 +36,54 @@ export class ChatRoom extends Component {
           (!this.props.user || this.props.user === "Anonymous")
         ) {
           this.props.history.push("/");
+        } else {
+          this.syncAllowedUsers();
         }
         return data;
       });
     if (this.props.match.params.channelId) {
       // TODO: MAKE A CHANNEL CONTROL. IF NOT REDIRECT TO HOME
       this.setState(
-        { activeChannel: this.props.match.params.channelId },
-        this.syncMessages()
+        prevState => ({
+          activeChannel: this.props.match.params.channelId
+        }),
+        () => {
+          this.syncRef = this.syncMessages(this.props.match.params.channelId);
+        }
       );
     } else {
-      this.setState({ activeChannel: "home" }, this.syncMessages());
+      this.setState(
+        { activeChannel: "home" },
+        () => (this.syncRef = this.syncMessages())
+      );
     }
     this.syncChannels();
-
     this.scrollToBottom();
   }
 
-  syncMessages = () => {
+  syncAllowedUsers = () => {
+    base.syncState(`config/${this.props.match.params.roomId}/users`, {
+      context: this,
+      state: "allowedUsers",
+      asArray: true,
+      then: () => {
+        this.afterLoading();
+      }
+    });
+  };
+
+  syncMessages = (channelId = "home") => {
     const { roomId } = this.state;
     const channel = this.props.match.params.channelId || "home";
 
-    base.syncState(`messages/${roomId}/${channel}`, {
+    return (this.sync = base.syncState(`messages/${roomId}/${channelId}`, {
       context: this,
       state: "messages",
       asArray: true,
       then: () => {
         this.afterLoading();
       }
-    });
+    }));
   };
 
   syncChannels = () => {
@@ -95,7 +116,7 @@ export class ChatRoom extends Component {
 
   afterLoading = () => {
     this.scrollToBottom();
-    console.log("loaded");
+    // console.log("loaded");
   };
 
   scrollToBottom = () => {
@@ -118,6 +139,12 @@ export class ChatRoom extends Component {
     }));
   };
 
+  addAllowedUser = user => {
+    this.setState(prevState => ({
+      allowedUsers: [...prevState.allowedUsers, user]
+    }));
+  };
+
   render() {
     return (
       <div className="chatroom__container">
@@ -126,6 +153,7 @@ export class ChatRoom extends Component {
           onCreateChannel={this.onCreateChannel}
           roomId={this.state.roomId}
           ariaExpanded={this.state.sidebarExpanded}
+          onAddAllowedUser={this.addAllowedUser}
         />
         <MainSection
           messages={this.state.messages}
