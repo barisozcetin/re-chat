@@ -6,7 +6,7 @@ A simple chat application made with react
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Prerequisites
 
 What things you need to install the software and how to install them
 
@@ -14,7 +14,7 @@ What things you need to install the software and how to install them
 node
 ```
 
-### Installing
+## Installing
 
 There is not much to do for installing. Just install dependencies with npm or yarn
 
@@ -28,6 +28,20 @@ And then just run
 ### `npm start`
 ```
 
-### Live Demo
+## Live Demo
 
 https://re-chat-80204.firebaseapp.com/
+
+## License
+
+This project is licensed under the MIT License
+
+## Languages & tools
+
+### JavaScript
+
+- [React](http://facebook.github.io/react) is used for ui.
+
+### CSS
+
+- [Bulma](https://bulma.io) is used for elements/helpers.
