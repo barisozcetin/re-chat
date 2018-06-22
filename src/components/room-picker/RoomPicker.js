@@ -8,9 +8,9 @@ import RoomCreate from "./RoomCreate";
 
 export class RoomPicker extends Component {
   state = {
-    channel: "",
-    newChannel: "",
-    channelType: "public",
+    room: "",
+    newRoom: "",
+    roomType: "public",
     errors: {},
     password: "",
     privateRoom: false
@@ -24,104 +24,78 @@ export class RoomPicker extends Component {
   };
 
   onOptionChange = e => {
-    this.setState({ channelType: e.target.value });
+    this.setState({ roomType: e.target.value });
   };
 
   onJoin = e => {
     e.preventDefault();
     const { history } = this.props;
-    if (!this.state.channel || this.state.channel.length === 0) return false;
+    if (!this.state.room || this.state.room.length === 0) return false;
     base
-      .fetch(`channels/${this.state.channel}`, {
+      .fetch(`rooms/${this.state.room}`, {
         context: this,
         asArray: true
       })
       .then(response => {
-        // CHECK IF CHANNEL EXIST
+        // CHECK IF ROOM EXIST
         if (response.length > 0) {
           base
-            .fetch(`config/${this.state.channel}/private`, {
+            .fetch(`config/${this.state.room}/private`, {
               context: this,
               asArray: false
             })
             .then(resp => {
-              // CHECK IF CHANNEL PASSWORD PROTECTED
+              // CHECK IF ROOM PRIVATE
               if (resp === true) {
-                // CHECK USER ENTERED PASSWORD
-                if (this.state.password.trim().length > 0) {
-                  // TODO: PASSWORD CONTROL. THIS IS NOT CRYPTED AND TEST PURPOSE ONLY
-                  base
-                    .fetch(`config/${this.state.channel}/password`, {})
-                    .then(pw => {
-                      // IF PASSWORD CORRECT
-                      if (pw.toString() === this.state.password) {
-                        const channelLink = `/room/${this.state.channel}`;
-                        history.push(channelLink);
-                      } else {
-                        this.setState({
-                          errors: {
-                            ...this.state.errors,
-                            private: "Wrong Password"
-                          }
-                        });
-                      }
-                    });
-                } else {
+                if (!this.props.isAuthenticated) {
                   this.setState({
+                    privateRoom: true,
                     errors: {
                       ...this.state.errors,
-                      private: "Private Channel. Enter Password"
+                      private: "This room is private. Login to enter"
                     }
                   });
+                } else {
+                  const roomLink = `/room/${this.state.room}`;
+                  history.push(roomLink);
                 }
               } else {
-                const channelLink = `/room/${this.state.channel}`;
-                history.push(channelLink);
+                const roomLink = `/room/${this.state.room}`;
+                history.push(roomLink);
               }
             });
         } else {
           this.setState({
             errors: {
               ...this.state.errors,
-              joinChannel: "No channel found with this name"
+              joinRoom: "No room found with this name"
             }
           });
-          console.log("No channel found with this name");
+          console.log("No room found with this name");
         }
       });
   };
 
   render() {
-    const passwordField = (
-      <TextFieldGroup
-        name="password"
-        placeholder="Room Password"
-        type="password"
-        value={this.state.password}
-        onChange={this.onInputChange}
-        icon="fas fa-lock"
-        error={this.state.errors.private}
-      />
-    );
     return (
       <section className="picker__section join as-c">
-        <h2 className="is-size-4 mb-1 has-text-centered">Join a channel</h2>
+        <h2 className="is-size-4 mb-1 has-text-centered">Join a room</h2>
         <form onSubmit={this.onJoin} className="form-flex">
           <TextFieldGroup
-            name="channel"
-            placeholder="Channel Name"
+            name="room"
+            placeholder="Room Name"
             onChange={this.onInputChange}
-            value={this.state.channel}
+            value={this.state.room}
             type="text"
             icon="fa-comments"
-            error={this.state.errors.joinChannel}
+            error={this.state.errors.joinRoom}
           />
-          {this.state.errors.private && passwordField}
+          {this.state.errors.private && this.state.errors.private}
           <input
             type="submit"
             value="Connect"
             className="button is-primary"
-            disabled={!this.state.channel.length}
+            disabled={!this.state.room.length}
           />
         </form>
       </section>

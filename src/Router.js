@@ -30,6 +30,7 @@ const Router = () => (
             component={ChatRoom}
             isAuthenticated={context.state.isAuthenticated}
             user={context.state.user}
+            signOut={context.signOut}
           />
           <PrivateRoute
             path="/room/:roomId/"

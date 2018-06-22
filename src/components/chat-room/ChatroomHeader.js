@@ -40,17 +40,12 @@ const ChatroomHeader = props => {
           <div className="navbar-item">
             <div className="field is-grouped">
               <p className="control">
-                <a
-                  className="bd-tw-button button is-hidden-mobile"
-                  data-social-network="Twitter"
-                  data-social-action="tweet"
-                  data-social-target="http://localhost:4000"
-                >
+                <Link className="bd-tw-button button is-hidden-mobile" to="/">
                   <span className="icon">
-                    <i className="fab fa-twitter" />
+                    <i className="fas fa-home" />
                   </span>
-                  <span>Tweet</span>
-                </a>
+                  <span>Home</span>
+                </Link>
               </p>
             </div>
           </div>

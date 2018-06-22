@@ -7,7 +7,7 @@ import InviteModal from "./InviteModal";
 
 export class SideBar extends Component {
   state = {
-    newchannel: "",
+    newChannel: "",
     filter: "",
     filteredChannels: [],
     modalActive: false
@@ -49,7 +49,8 @@ export class SideBar extends Component {
 
   createChannel = e => {
     e.preventDefault();
-    this.props.onCreateChannel(this.state.newChannel);
+    const channel = this.state.newChannel;
+    this.props.onCreateChannel(channel);
     this.setState({ newChannel: "" });
   };
 
@@ -59,7 +60,7 @@ export class SideBar extends Component {
 
   render() {
     const { roomId, ariaExpanded } = this.props;
-    const { filteredChannels, filter, newchannel } = this.state;
+    const { filteredChannels, filter, newChannel } = this.state;
     return (
       <nav className="chatroom__navigation" aria-expanded={ariaExpanded}>
         <div className="card bg-transparent">
@@ -73,10 +74,10 @@ export class SideBar extends Component {
           </header>
         </div>
         <aside className="menu mt-2 prl-1">
-          <p className="menu-label is-size-5">Rooms</p>
+          <p className="menu-label is-size-5">Channels</p>
           <TextFieldGroup
             name="filter"
-            placeholder="Find a room"
+            placeholder="Find a channel"
             onChange={this.onInputChange}
             value={filter}
             type="text"
@@ -97,11 +98,11 @@ export class SideBar extends Component {
           <div className="">
             <form onSubmit={this.createChannel}>
               <InputWithButton
-                placeholder="Room name"
+                placeholder="Channel name"
                 type="text"
-                name="newchannel"
+                name="newChannel"
                 buttonText="Create"
-                value={newchannel}
+                value={newChannel}
                 onChange={this.onInputChange}
               />
             </form>
@@ -112,7 +113,19 @@ export class SideBar extends Component {
               className="button is-transparent"
               onClick={this.toggleModal}
             >
-              Share <i className="fas fa-share" />
+              <span>Share</span>
+              <span className="icon is-small">
+                <i className="fas fa-share" />
+              </span>
+            </button>
+            <button
+              className="button is-transparent"
+              onClick={this.toggleModal}
+            >
+              <span>Invite</span>
+              <span className="icon is-small">
+                <i className="fas fa-share" />
+              </span>
             </button>
           </div>
         </aside>

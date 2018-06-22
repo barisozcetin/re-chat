@@ -2,33 +2,60 @@ import React, { Component } from "react";
 import base from "../../base";
 import SideBar from "./SideBar";
 import MainSection from "./MainSection";
-
+import { withRouter } from "react-router-dom";
 export class ChatRoom extends Component {
   state = {
     roomId: this.props.match.params.roomId,
     channels: [],
-    activeChannel: "home",
+    activeChannel: "",
     messages: [],
     newMessage: "",
-    sidebarExpanded: false
+    sidebarExpanded: false,
+    isPrivate: false
   };
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.match.params.channelId !== prevProps.match.params.channelId
+    ) {
+      this.syncMessages();
+    }
+  }
+
   componentDidMount() {
-    this.syncChannels();
-    this.syncMessages();
-    /*  if (this.state.channels.length === 0) {
-      this.setState({ channels: ["home"] });
-    } */
+    const isPrivate = base
+      .fetch(`/config/${this.props.match.params.roomId}/private`, {
+        context: this
+      })
+      .then(data => {
+        this.setState({ isPrivate: data || "false" });
+        if (
+          data == "true" &&
+          (!this.props.user || this.props.user === "Anonymous")
+        ) {
+          this.props.history.push("/");
+        }
+        return data;
+      });
     if (this.props.match.params.channelId) {
       // TODO: MAKE A CHANNEL CONTROL. IF NOT REDIRECT TO HOME
-      this.setState({ activeChannel: this.props.match.params.channelId });
+      this.setState(
+        { activeChannel: this.props.match.params.channelId },
+        this.syncMessages()
+      );
+    } else {
+      this.setState({ activeChannel: "home" }, this.syncMessages());
     }
+    this.syncChannels();
+
     this.scrollToBottom();
   }
 
   syncMessages = () => {
-    const { roomId, activeChannel } = this.state;
-    base.syncState(`messages/${roomId}/${activeChannel}`, {
+    const { roomId } = this.state;
+    const channel = this.props.match.params.channelId || "home";
+
+    base.syncState(`messages/${roomId}/${channel}`, {
       context: this,
       state: "messages",
       asArray: true,
@@ -39,7 +66,7 @@ export class ChatRoom extends Component {
   };
 
   syncChannels = () => {
-    base.syncState(`channels/${this.state.roomId}/`, {
+    base.syncState(`rooms/${this.state.roomId}/`, {
       context: this,
       state: "channels",
       asArray: true
@@ -52,9 +79,14 @@ export class ChatRoom extends Component {
   };
 
   onMessageSubmit = () => {
+    const user = this.props.user;
+    const date = new Date().toGMTString();
     this.setState(
       prevstate => ({
-        messages: [...prevstate.messages, prevstate.newMessage],
+        messages: [
+          ...prevstate.messages,
+          { user, message: prevstate.newMessage, date }
+        ],
         newMessage: ""
       }),
       this.scrollToBottom
@@ -76,7 +108,7 @@ export class ChatRoom extends Component {
         channels: [...prevstate.channels, newChannel]
       }));
     } else {
-      alert("this room is exist");
+      alert("this channel is exist");
     }
   };
 
@@ -108,4 +140,4 @@ export class ChatRoom extends Component {
   }
 }
 
-export default ChatRoom;
+export default withRouter(ChatRoom);

@@ -26,8 +26,8 @@ export class RoomMain extends Component {
           signOut={this.logOut}
           toggleModal={this.onModalToggle}
         />
-        <RoomPicker />
-        <RoomCreate />
+        <RoomPicker isAuthenticated={this.props.isAuthenticated} />
+        <RoomCreate isAuthenticated={this.props.isAuthenticated} />
         <AuthModal
           isActive={this.state.modalActive}
           onClose={this.onModalToggle}

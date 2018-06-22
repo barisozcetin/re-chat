@@ -66,7 +66,7 @@ class RoomCreate extends Component {
 
     return (
       <section className="picker__section create as-c">
-        <h2 className="is-size-4 mb-1 has-text-centered">Crete a channel</h2>
+        <h2 className="is-size-4 mb-1 has-text-centered">Crete a room</h2>
         <form
           method="POST"
           className="form-flex"
@@ -99,7 +99,7 @@ class RoomCreate extends Component {
             <div className="help">
               {!this.state.privateRoom
                 ? "Everybody can join the room"
-                : roomPassword}
+                : "Only invited users can join the room"}
             </div>
           </div>
           <input

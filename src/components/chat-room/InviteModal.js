@@ -17,15 +17,14 @@ export class inviteModal extends Component {
               onClick={() => alert("copied")}
             />
           </div>
+          <button className="button">Facebook</button>
+          <button className="button">Twitter</button>
         </div>
         <button
           className="modal-close is-large"
           aria-label="close"
           onClick={this.props.onClose}
         />
-        <button className="button">Facebook</button>
-        <button className="button">Twitter</button>
-        <button className="button" />
       </div>
     );
   }

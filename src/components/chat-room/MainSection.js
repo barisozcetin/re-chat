@@ -24,17 +24,12 @@ const MainSection = props => {
                       </div>
                       <div className="media-content">
                         <p className="title is-size-4 is-marginless	">
-                          John Smith{" "}
-                          <small className="is-size-6">
-                            {" "}
-                            @ 11:09 PM - 1 Jan 2016
-                          </small>
+                          {msg.user || "Anonymous"}{" "}
+                          <small className="is-size-6"> @ {msg.date}</small>
                         </p>
 
                         <div className="message-text">
-                          {msg} <a>@bulmaio</a>.
-                          <a href="www.barisozcetin.me">#css</a>{" "}
-                          <a href="www.barisozcetin.me">#responsive</a>
+                          {msg.message}
                           <br />
                         </div>
                       </div>
@@ -57,10 +52,20 @@ const MainSection = props => {
             type="text"
             className="textarea"
             rows="3"
+            placeholder="Press ctrl+enter or cmd+enter to send"
             value={props.newMessage}
             onChange={props.onMessageChange}
+            onKeyUp={e => {
+              if (e.keyCode === 13 && (e.metaKey || e.ctrlKey)) {
+                props.onMessageSubmit();
+              }
+            }}
           />
-          <input type="submit" value="Send" className="button is-primary" />
+          <input
+            type="submit"
+            value="Send"
+            className="button is-primary full-height"
+          />
         </form>
       </div>
     </div>

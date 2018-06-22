@@ -8,7 +8,7 @@ const MainContext = React.createContext();
 class MainProvider extends Component {
   state = {
     isAuthenticated: false,
-    user: ""
+    user: "Anonymous"
   };
 
   onLogin = user => {
@@ -22,7 +22,7 @@ class MainProvider extends Component {
       .then(() =>
         this.setState({
           isAuthenticated: false,
-          user: ""
+          user: "Anonymous"
         })
       );
   };
