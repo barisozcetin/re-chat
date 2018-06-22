@@ -1,6 +1,6 @@
 # re-chat
 
-A simple chat application made with react
+A simple chat application made with react and Firebase real time database
 
 ## Live Demo
 
@@ -43,6 +43,10 @@ And then just run
 This project is licensed under the MIT License
 
 ## Languages & tools
+
+### Database
+
+- [Firebase](https://firebase.google.com) is used for real-time database
 
 ### JavaScript
 
