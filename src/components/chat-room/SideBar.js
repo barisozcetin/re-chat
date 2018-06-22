@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import InputWithButton from "../common/InputWithButton";
-import InviteModal from "./InviteModal";
+import ShareModal from "./ShareModal";
 
 export class SideBar extends Component {
   state = {
@@ -129,7 +129,7 @@ export class SideBar extends Component {
             </button>
           </div>
         </aside>
-        <InviteModal
+        <ShareModal
           roomId={roomId}
           isActive={this.state.modalActive}
           onClose={this.toggleModal}

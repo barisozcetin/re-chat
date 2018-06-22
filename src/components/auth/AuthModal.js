@@ -3,7 +3,7 @@ import InputWithButton from "../common/InputWithButton";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-export class inviteModal extends Component {
+export class AuthModal extends Component {
   state = {
     component: "login"
   };
@@ -36,4 +36,4 @@ export class inviteModal extends Component {
   }
 }
 
-export default inviteModal;
+export default AuthModal;
