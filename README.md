@@ -23,13 +23,15 @@ node
 There is not much to do for installing. Just install dependencies with npm or yarn
 
 ```
-### `npm install`
+`npm install`
 ```
+
+Edit config/firebase-config-example.js to firebase-config.js and enter your firebase info
 
 And then just run
 
 ```
-### `npm start`
+`npm start`
 ```
 
 ## Building
