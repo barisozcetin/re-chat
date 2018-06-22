@@ -49,7 +49,7 @@ class Navbar extends Component {
 
         <div id="navbarExampleTransparentExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item" href="https://bulma.io/">
+            <a className="navbar-item" href="/">
               Home
             </a>
             <div className="navbar-item has-dropdown is-hoverable">
@@ -59,7 +59,7 @@ class Navbar extends Component {
               <div className="navbar-dropdown is-boxed">
                 <a
                   className="navbar-item"
-                  href="/documentation/overview/start/"
+                  href="https://github.com/barisozcetin/re-chat"
                 >
                   <span className="icon ">
                     <i class="fab fa-github" />
