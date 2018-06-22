@@ -6,7 +6,7 @@ const InviteModal = props => {
       <div className="modal-background" onClick={props.onClose} />
       <div className="modal-content chatroom__modal">
         <div className="box modal__box grid">
-          <div className="select is-multiple">
+          {/* <div className="select is-multiple">
             <select multiple size="8">
               <option value="Argentina">Argentina</option>
               <option value="Bolivia">Bolivia</option>
@@ -21,7 +21,8 @@ const InviteModal = props => {
               <option value="Uruguay">Uruguay</option>
               <option value="Venezuela">Venezuela</option>
             </select>
-          </div>
+          </div> */}
+          <p className="text-center align-center">Coming soon</p>
         </div>
       </div>
       <button

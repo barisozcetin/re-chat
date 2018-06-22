@@ -28,6 +28,10 @@ export class RoomMain extends Component {
         />
         <RoomPicker isAuthenticated={this.props.isAuthenticated} />
         <RoomCreate isAuthenticated={this.props.isAuthenticated} />
+        <p className="text-center about__text">
+          A simple chat application made with react & firebase. Made by{" "}
+          <a href="https://www.barisozcetin.me">Baris Ozcetin</a>
+        </p>
         <AuthModal
           isActive={this.state.modalActive}
           onClose={this.onModalToggle}

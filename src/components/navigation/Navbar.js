@@ -62,7 +62,7 @@ class Navbar extends Component {
                   href="https://github.com/barisozcetin/re-chat"
                 >
                   <span className="icon ">
-                    <i class="fab fa-github" />
+                    <i className="fab fa-github" />
                   </span>
                   <span>Github</span>
                 </a>
