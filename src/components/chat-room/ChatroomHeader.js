@@ -8,7 +8,7 @@ const ChatroomHeader = props => {
         <div className="navbar-brand">
           <Link className="navbar-item" to="/">
             <img
-              src="https://bulma.io/images/bulma-logo.png"
+              src="/logof.png"
               alt="Bulma: a modern CSS framework based on Flexbox"
               width="112"
               height="28"

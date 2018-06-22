@@ -30,10 +30,11 @@ class Navbar extends Component {
         <div className="navbar-brand">
           <a className="navbar-item" href="https://bulma.io">
             <img
-              src="https://bulma.io/images/bulma-logo.png"
+              src="/logof.png"
               alt="Bulma: a modern CSS framework based on Flexbox"
-              width="112"
-              height="28"
+              width="120"
+              height="140"
+              className="logo"
             />
           </a>
           <div

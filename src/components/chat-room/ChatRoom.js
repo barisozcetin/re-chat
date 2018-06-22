@@ -31,6 +31,7 @@ export class ChatRoom extends Component {
     base.syncState(`messages/${roomId}/${activeChannel}`, {
       context: this,
       state: "messages",
+      asArray: true,
       then: () => {
         this.afterLoading();
       }
