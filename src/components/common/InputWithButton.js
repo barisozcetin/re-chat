@@ -9,10 +9,11 @@ const InputWithButton = ({
   buttonText,
   onChange,
   onClick,
-  readOnly = false
+  readOnly = false,
+  extraClass = ""
 }) => {
   return (
-    <div className="field has-addons">
+    <div className={`field has-addons ${extraClass}`}>
       <div className="control is-expanded">
         <input
           className="input"

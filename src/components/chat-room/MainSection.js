@@ -5,7 +5,11 @@ import ChatroomHeader from "./ChatroomHeader";
 const MainSection = props => {
   return (
     <div className="chatroom__main">
-      <ChatroomHeader roomId={props.roomId} onToggle={props.onToggle} />
+      <ChatroomHeader
+        roomId={props.roomId}
+        onToggle={props.onToggle}
+        pageUrl={props.pageUrl}
+      />
       <div className="chatroom__messages" id="messages">
         <ul>
           {props.messages.length > 0 &&

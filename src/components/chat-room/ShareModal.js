@@ -7,7 +7,7 @@ export class ShareModal extends Component {
       <div className={`modal ${this.props.isActive && "is-active"}`}>
         <div className="modal-background" onClick={this.props.onClose} />
         <div className="modal-content chatroom__modal">
-          <div className="box modal__box">
+          <div className="box modal__box grid">
             <InputWithButton
               type="string"
               name="room-link"
@@ -15,9 +15,13 @@ export class ShareModal extends Component {
               buttonText="Copy Link"
               readOnly={true}
               onClick={() => alert("copied")}
+              extraClass="align-center"
             />
-            <button className="button">Facebook</button>
-            <button className="button">Twitter</button>
+
+            <div className="flex pbt-1">
+              <button className="button is-large flex-1 mr-1">Facebook</button>
+              <button className="button is-large flex-1">Twitter</button>
+            </div>
           </div>
         </div>
         <button

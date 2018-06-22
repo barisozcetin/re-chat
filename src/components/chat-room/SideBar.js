@@ -119,9 +119,9 @@ export class SideBar extends Component {
             </form>
           </div>
           <br />
-          <div className="share">
+          <div className="sidebar__share flex">
             <button
-              className="button is-transparent"
+              className="button is-transparent flex-1"
               onClick={() => this.toggleModal("shareModal")}
             >
               <span>Share</span>
@@ -129,15 +129,17 @@ export class SideBar extends Component {
                 <i className="fas fa-share" />
               </span>
             </button>
-            <button
-              className="button is-transparent"
-              onClick={() => this.toggleModal("inviteModal")}
-            >
-              <span>Invite</span>
-              <span className="icon is-small">
-                <i className="fas fa-share" />
-              </span>
-            </button>
+            {this.props.isPrivate && (
+              <button
+                className="button is-transparent flex-1"
+                onClick={() => this.toggleModal("inviteModal")}
+              >
+                <span>Invite</span>
+                <span className="icon is-small">
+                  <i className="fas fa-share" />
+                </span>
+              </button>
+            )}
           </div>
         </aside>
         <ShareModal

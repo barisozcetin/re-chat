@@ -33,7 +33,7 @@ const ChatroomHeader = props => {
         >
           <div className="navbar-start ml-auto">
             {" "}
-            <Link className="navbar-item bold" to="/">
+            <Link className="navbar-item bold" to={props.pageUrl}>
               {props.roomId}
             </Link>
           </div>

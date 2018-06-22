@@ -54,14 +54,17 @@ class Navbar extends Component {
             </a>
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link" href="/documentation/overview/start/">
-                Docs
+                Links
               </a>
               <div className="navbar-dropdown is-boxed">
                 <a
                   className="navbar-item"
                   href="/documentation/overview/start/"
                 >
-                  Overview
+                  <span className="icon ">
+                    <i class="fab fa-github" />
+                  </span>
+                  <span>Github</span>
                 </a>
               </div>
             </div>

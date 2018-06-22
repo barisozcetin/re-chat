@@ -202,6 +202,10 @@ html {
   margin-left: auto;
 }
 
+.mr-1 {
+  margin-right: 1rem;
+}
+
 .p-2 {
   padding: 2rem;
 }
@@ -211,6 +215,11 @@ html {
 }
 
 .pb-1 {
+  padding-bottom: 1rem;
+}
+
+.pbt-1 {
+  padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
@@ -234,6 +243,10 @@ html {
   text-align: center;
 }
 
+.align-center {
+  align-items: center;
+}
+
 .bg-transparent {
   background-color: transparent;
 }
@@ -244,4 +257,16 @@ html {
 
 a[aria-current="true"] {
   background-color: #b7e8e8;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.grid {
+  display: grid;
 }

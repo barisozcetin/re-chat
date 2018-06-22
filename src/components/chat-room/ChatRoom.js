@@ -30,7 +30,7 @@ export class ChatRoom extends Component {
         context: this
       })
       .then(data => {
-        this.setState({ isPrivate: data || "false" });
+        this.setState({ isPrivate: data === true ? true : false });
         if (
           data == "true" &&
           (!this.props.user || this.props.user === "Anonymous")
@@ -154,6 +154,7 @@ export class ChatRoom extends Component {
           roomId={this.state.roomId}
           ariaExpanded={this.state.sidebarExpanded}
           onAddAllowedUser={this.addAllowedUser}
+          isPrivate={this.state.isPrivate}
         />
         <MainSection
           messages={this.state.messages}
@@ -162,6 +163,7 @@ export class ChatRoom extends Component {
           onMessageChange={this.onMessageChange}
           onMessageSubmit={this.onMessageSubmit}
           onToggle={this.toggleSidebarOnMobile}
+          pageUrl={this.props.match.url}
         />
       </div>
     );
