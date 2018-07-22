@@ -20,7 +20,7 @@ const MainSection = (props) => {
 												</figure>
 											</div>
 											<div className="media-content">
-												<p className="title is-size-4 is-marginless	">
+												<p className="title is-size-5 is-marginless	">
 													{msg.user || 'Anonymous'} <small className="is-size-6"> @ {msg.date}</small>
 												</p>
 

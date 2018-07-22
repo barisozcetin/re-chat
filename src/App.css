@@ -30,14 +30,15 @@ html {
 .chatroom__main {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 80px auto 80px;
+	grid-template-rows: 50px auto 80px;
 	grid-template-areas: "header" "content" "footer";
-	height: 100vh;
+	/* height: 100vh; */
+	height: var(--var-height);
 }
 
 .chatroom__messages {
 	background-color: beige;
-	max-height: calc(100vh-80px);
+	/* max-height: calc(100vh-80px); */
 	overflow: auto;
 }
 
@@ -72,7 +73,7 @@ html {
 	height: 100%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
 	.chatroom__navigation {
 		height: 100%;
 		width: 0;
@@ -81,7 +82,7 @@ html {
 		top: 0;
 		left: 0;
 		overflow-x: hidden;
-		transition: 0.5s;
+		transition: 0.3s ease-out;
 		padding-top: 60px;
 	}
 	.chatroom__navigation[aria-expanded="true"] {
@@ -90,20 +91,37 @@ html {
 	.chatroom__container {
 		grid-template-columns: 1fr;
 	}
+	.sidebar__share {
+		padding-top: 5px;
+	}
 }
 
 #ml > li:nth-child(2n + 1) > .card {
 	background-color: white;
 }
 #ml > li:nth-child(2n) > .card {
-	background-color: #f2f5e0;
+	background-color: #f2f5f0;
 }
 .channel-list {
 	/* border: 1px dotted black; */
-	max-height: 40vh;
+	max-height: 30vh;
 	overflow-y: auto;
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
+}
+
+@media screen and (min-width: 768px) {
+	.channel-list {
+		/* border: 1px dotted black; */
+		max-height: 40vh;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	#channels-lbl {
+		/* border: 1px dotted black; */
+		margin-bottom: 5px;
+	}
 }
 
 .channel-list::-webkit-scrollbar-track {
@@ -141,13 +159,14 @@ html {
 
 .picker__container {
 	display: grid;
-	height: 500px;
+	/* height: 500px; */
 	grid-gap: 10px;
-	grid-template-rows: auto 1fr 1fr;
+	grid-template-rows: auto minmax(100px, 30vh) minmax(100px, 35vh) auto;
 	grid-template-areas: "navbar" "join" "create" "about";
-
-	height: 80vh;
-	margin-top: 10vh;
+	/* height: 100vh; */
+	/* height: 100%; */
+	height: var(--var-height);
+	max-height: var(--var-height);
 }
 
 .picker__section {
@@ -155,14 +174,34 @@ html {
 	justify-self: center;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+	.picker__container {
+		grid-template-columns: 1fr;
+		grid-template-rows: 50px 150px 150px 50px;
+		grid-template-areas: "navbar" "create" "join" "about";
+		height: var(--var-height);
+	}
+	.picker__section {
+		width: 60%;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
 	.picker__container {
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 50px 500px;
 		grid-template-areas: "navbar navbar" "create join" "about about";
+		height: 80vh;
+		margin-top: 10vh;
 	}
 	.picker__section {
 		width: 60%;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.picker__section {
+		align-self: center;
 	}
 }
 

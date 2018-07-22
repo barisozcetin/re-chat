@@ -90,8 +90,10 @@ export class SideBar extends Component {
 						</div>
 					</div>
 				</div>
-				<aside className="menu mt-2 prl-1">
-					<p className="menu-label is-size-5 text-center">Channels</p>
+				<aside className="menu prl-1">
+					<p className="menu-label is-size-5 text-center" id="channels-lbl">
+						Channels
+					</p>
 					<TextFieldGroup
 						name="filter"
 						placeholder="Find a channel"
@@ -122,7 +124,7 @@ export class SideBar extends Component {
 							/>
 						</form>
 					</div>
-					<br />
+					<br className="is-hidden-mobile" />
 					<div className="sidebar__share flex">
 						<button className="button is-transparent flex-1" onClick={() => this.toggleModal('shareModal')}>
 							<span>Share</span>
