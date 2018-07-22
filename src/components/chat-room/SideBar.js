@@ -12,15 +12,27 @@ export class SideBar extends Component {
 		filter: '',
 		filteredChannels: [],
 		shareModalActive: false,
-		inviteModalActive: false
+		inviteModalActive: false,
+		nickName: ''
 	};
 	static propTypes = {
 		channels: PropTypes.array.isRequired
 	};
 
+	componentDidMount() {
+		// this.setState({ nickName: this.props.nickName });
+		// console.log(this.props.nickName);
+		console.log(this.props.nickName);
+	}
+
 	componentWillReceiveProps(newProps) {
 		if (newProps.channels.length !== this.state.filteredChannels.length && newProps.channels.length > 0) {
 			this.setState({ filteredChannels: newProps.channels });
+		}
+		if (newProps.nickName) {
+			console.log('-----');
+			console.log(newProps.nickName);
+			this.setState({ nickName: newProps.nickName });
 		}
 	}
 	onNewChannelChange = (e) => {
@@ -63,6 +75,11 @@ export class SideBar extends Component {
 		this.props.onAddAllowedUser('baris@hotmail.com');
 	};
 
+	handleNickChange = () => {
+		const { nickName } = this.state;
+		this.props.changeNick(nickName);
+	};
+
 	render() {
 		const { roomId, ariaExpanded } = this.props;
 		const { filteredChannels, filter, newChannel } = this.state;
@@ -80,12 +97,13 @@ export class SideBar extends Component {
 					<div className="card-content">
 						<div className="content">
 							<InputWithButton
-								placeholder="Channel name"
+								placeholder="Nick name"
 								type="text"
-								name="newChannel"
+								name="nickName"
 								buttonText="Change"
-								value="nickname"
+								value={this.state.nickName}
 								onChange={this.onInputChange}
+								onClick={this.handleNickChange}
 							/>
 						</div>
 					</div>

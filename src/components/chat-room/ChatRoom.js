@@ -13,7 +13,8 @@ export class ChatRoom extends Component {
 		sidebarExpanded: false,
 		isPrivate: false,
 		allowedUsers: [],
-		height: 100
+		height: 100,
+		nickName: ''
 	};
 
 	componentDidUpdate(prevProps) {
@@ -76,6 +77,8 @@ export class ChatRoom extends Component {
 			state: 'messages',
 			asArray: true,
 			then: () => {
+				this.setState({ nickName: this.props.user });
+
 				this.afterLoading();
 			}
 		}));
@@ -95,7 +98,7 @@ export class ChatRoom extends Component {
 	};
 
 	onMessageSubmit = () => {
-		const user = this.props.user;
+		const user = this.state.nickName || this.props.user;
 		const date = new Date().toGMTString();
 		this.setState(
 			(prevstate) => ({
@@ -146,6 +149,11 @@ export class ChatRoom extends Component {
 		return { '--var-height': this.state.height + 'px' };
 	};
 
+	onNickChange = (nickName) => {
+		if (!nickName || nickName.trim().length === 0) return false;
+		this.setState({ nickName });
+	};
+
 	render() {
 		return (
 			<div className="chatroom__container" style={this.getHeight()}>
@@ -156,6 +164,8 @@ export class ChatRoom extends Component {
 					ariaExpanded={this.state.sidebarExpanded}
 					onAddAllowedUser={this.addAllowedUser}
 					isPrivate={this.state.isPrivate}
+					nickName={this.state.nickName}
+					changeNick={this.onNickChange}
 				/>
 				<MainSection
 					messages={this.state.messages}
