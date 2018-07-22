@@ -28,6 +28,7 @@ class MainProvider extends Component {
 	componentDidMount() {
 		this.removeListener = firebaseApp.auth().onAuthStateChanged((user) => {
 			if (user) {
+				//TODO: USE checkNickName method here
 				this.setState({
 					isAuthenticated: true,
 					user: user.email,
@@ -41,6 +42,10 @@ class MainProvider extends Component {
 				});
 			}
 		});
+	}
+
+	checkNickName() {
+		//TODO: Write a method to check if user already set a nickname. If they did, fetch that name and use it on main provider
 	}
 
 	render() {
