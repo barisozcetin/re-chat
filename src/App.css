@@ -18,8 +18,9 @@ html {
 	grid-template-rows: 1fr;
 	/* height: 100vh; */
 	overflow-y: hidden;
-	height: var(--var-height);
+	/* height: var(--var-height); */
 	max-height: var(--var-height);
+	/* min-height: 400px; */
 	transition: all ease-in-out 0.5s;
 }
 
@@ -156,17 +157,23 @@ html {
 .about__text {
 	grid-area: about;
 }
+@media screen and (max-height: 400px) {
+	.about__text {
+		display: none;
+	}
+}
 
 .picker__container {
 	display: grid;
 	/* height: 500px; */
-	grid-gap: 10px;
-	grid-template-rows: auto minmax(100px, 30vh) minmax(100px, 35vh) auto;
+	grid-gap: 6px;
+	grid-template-rows: auto minmax(100px, 30vh) minmax(140px, 35vh) auto;
 	grid-template-areas: "navbar" "join" "create" "about";
 	/* height: 100vh; */
 	/* height: 100%; */
 	height: var(--var-height);
 	max-height: var(--var-height);
+	min-height: 400px;
 }
 
 .picker__section {
@@ -349,4 +356,11 @@ a[aria-current="true"] {
 
 .grid {
 	display: grid;
+}
+
+/* FIXES FOR EDGE CASES */
+@media screen and (max-height: 768px) {
+	.mb-1 {
+		margin-bottom: 0.1rem;
+	}
 }

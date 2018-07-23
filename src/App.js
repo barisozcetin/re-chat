@@ -66,10 +66,30 @@ class MainProvider extends Component {
 export { MainContext };
 
 class App extends Component {
+	state = {
+		height: 500
+	};
+
+	componentDidMount() {
+		this.setHeight();
+		window.addEventListener('resize', this.setHeight.bind(this));
+	}
+
+	setHeight = () => {
+		// this.scrollToBottom();
+
+		const height = window.innerHeight;
+		this.setState({ height });
+	};
+
+	getHeight = () => {
+		return { '--var-height': this.state.height + 'px' };
+	};
+
 	render() {
 		return (
 			<MainProvider>
-				<div id="app">
+				<div id="app" style={this.getHeight()}>
 					<Router />
 				</div>
 			</MainProvider>

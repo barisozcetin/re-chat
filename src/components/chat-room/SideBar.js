@@ -22,7 +22,7 @@ export class SideBar extends Component {
 	componentDidMount() {
 		// this.setState({ nickName: this.props.nickName });
 		// console.log(this.props.nickName);
-		console.log(this.props.nickName);
+		// console.log(this.props.nickName);
 	}
 
 	componentWillReceiveProps(newProps) {
@@ -30,8 +30,8 @@ export class SideBar extends Component {
 			this.setState({ filteredChannels: newProps.channels });
 		}
 		if (newProps.nickName) {
-			console.log('-----');
-			console.log(newProps.nickName);
+			// console.log('-----');
+			// console.log(newProps.nickName);
 			this.setState({ nickName: newProps.nickName });
 		}
 	}

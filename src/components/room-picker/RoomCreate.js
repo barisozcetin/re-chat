@@ -18,13 +18,13 @@ class RoomCreate extends Component {
 	};
 
 	onInputChange = (e) => {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({ [e.target.name]: e.target.value.toLowerCase() });
 	};
 
 	onCreateClicked = (e) => {
 		e.preventDefault();
 
-		if (this.state.roomName.length === 0) return false;
+		if (this.state.roomName.trim().length === 0) return false;
 
 		/// CLEAR ERRORS
 		this.setState({ errors: {} });
@@ -66,7 +66,7 @@ class RoomCreate extends Component {
 
 		return (
 			<section className="picker__section create">
-				<h2 className="is-size-4 mb-1 has-text-centered">Crete a room</h2>
+				<h2 className="is-size-4 mb-1 has-text-centered">Create a room</h2>
 				<form method="POST" className="form-flex" onSubmit={this.onCreateClicked}>
 					<TextFieldGroup
 						name="roomName"

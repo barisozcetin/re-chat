@@ -8,21 +8,21 @@ import RoomCreate from './RoomCreate';
 
 export class RoomMain extends Component {
 	state = {
-		modalActive: false,
-		height: 100
+		modalActive: false
+		// height: 100
 	};
-	componentDidMount() {
-		this.setHeight();
-		window.addEventListener('resize', this.setHeight.bind(this));
-	}
-	setHeight = () => {
-		const height = window.innerHeight;
-		this.setState({ height });
-	};
+	// componentDidMount() {
+	// 	this.setHeight();
+	// 	// window.addEventListener('resize', this.setHeight.bind(this));
+	// }
+	// setHeight = () => {
+	// 	const height = window.innerHeight;
+	// 	this.setState({ height });
+	// };
 
-	getHeight = () => {
-		return { '--var-height': this.state.height + 'px' };
-	};
+	// getHeight = () => {
+	// 	return { '--var-height': this.state.height + 'px' };
+	// };
 	logOut = () => {
 		firebaseApp.auth().signOut();
 	};
@@ -33,7 +33,7 @@ export class RoomMain extends Component {
 
 	render() {
 		return (
-			<div className="container picker__container box" style={this.getHeight()}>
+			<div className="container picker__container box">
 				<Navbar isAuthenticated={this.props.isAuthenticated} signOut={this.logOut} toggleModal={this.onModalToggle} />
 				<RoomPicker isAuthenticated={this.props.isAuthenticated} />
 				<RoomCreate isAuthenticated={this.props.isAuthenticated} />

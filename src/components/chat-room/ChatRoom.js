@@ -13,7 +13,7 @@ export class ChatRoom extends Component {
 		sidebarExpanded: false,
 		isPrivate: false,
 		allowedUsers: [],
-		height: 100,
+		// height: 100,
 		nickName: ''
 	};
 
@@ -25,8 +25,8 @@ export class ChatRoom extends Component {
 	}
 
 	componentDidMount() {
-		this.setHeight();
-		window.addEventListener('resize', this.setHeight.bind(this));
+		// this.setHeight();
+		// window.addEventListener('resize', this.setHeight.bind(this));
 		const isPrivate = base
 			.fetch(`/config/${this.props.match.params.roomId}/private`, {
 				context: this
@@ -140,14 +140,16 @@ export class ChatRoom extends Component {
 		}));
 	};
 
-	setHeight = () => {
-		const height = window.innerHeight;
-		this.setState({ height });
-	};
+	// setHeight = () => {
+	// 	// this.scrollToBottom();
 
-	getHeight = () => {
-		return { '--var-height': this.state.height + 'px' };
-	};
+	// 	const height = window.innerHeight;
+	// 	this.setState({ height });
+	// };
+
+	// getHeight = () => {
+	// 	return { '--var-height': this.state.height + 'px' };
+	// };
 
 	onNickChange = (nickName) => {
 		if (!nickName || nickName.trim().length === 0) return false;
@@ -156,7 +158,7 @@ export class ChatRoom extends Component {
 
 	render() {
 		return (
-			<div className="chatroom__container" style={this.getHeight()}>
+			<div className="chatroom__container">
 				<SideBar
 					channels={this.state.channels}
 					onCreateChannel={this.onCreateChannel}
