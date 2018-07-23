@@ -27,19 +27,19 @@ export class ChatRoom extends Component {
 	componentDidMount() {
 		// this.setHeight();
 		// window.addEventListener('resize', this.setHeight.bind(this));
-		const isPrivate = base
-			.fetch(`/config/${this.props.match.params.roomId}/private`, {
-				context: this
-			})
-			.then((data) => {
-				this.setState({ isPrivate: data === true ? true : false });
-				if (data == 'true' && (!this.props.user || this.props.user === 'Anonymous')) {
-					this.props.history.push('/');
-				} else {
-					this.syncAllowedUsers();
-				}
-				return data;
-			});
+		// const isPrivate = base
+		// 	.fetch(`/config/${this.props.match.params.roomId}/private`, {
+		// 		context: this
+		// 	})
+		// 	.then((data) => {
+		// 		this.setState({ isPrivate: data === true ? true : false });
+		// 		if (data == 'true' && (!this.props.user || this.props.user === 'Anonymous')) {
+		// 			this.props.history.push('/');
+		// 		} else {
+		// 			this.syncAllowedUsers();
+		// 		}
+		// 		return data;
+		// 	});
 		if (this.props.match.params.channelId) {
 			// TODO: MAKE A CHANNEL CONTROL. IF NOT REDIRECT TO HOME
 			this.setState(

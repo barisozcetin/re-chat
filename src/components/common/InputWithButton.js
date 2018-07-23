@@ -26,7 +26,7 @@ const InputWithButton = ({
 				/>
 			</div>
 			<div className="control">
-				<button className="button is-info" disabled={value.trim().length === 0} onClick={onClick}>
+				<button className="button is-info" type="submit" disabled={value.trim().length === 0} onClick={onClick}>
 					{buttonText}
 				</button>
 			</div>

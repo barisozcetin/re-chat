@@ -75,7 +75,10 @@ export class SideBar extends Component {
 		this.props.onAddAllowedUser('baris@hotmail.com');
 	};
 
-	handleNickChange = () => {
+	handleNickChange = (e) => {
+		e.preventDefault();
+		e.currentTarget.focus();
+		e.currentTarget.blur();
 		const { nickName } = this.state;
 		this.props.changeNick(nickName);
 	};
@@ -94,17 +97,19 @@ export class SideBar extends Component {
 							</span>
 						</a>
 					</header>
-					<div className="card-content">
-						<div className="content">
-							<InputWithButton
-								placeholder="Nick name"
-								type="text"
-								name="nickName"
-								buttonText="Change"
-								value={this.state.nickName}
-								onChange={this.onInputChange}
-								onClick={this.handleNickChange}
-							/>
+					<div className="content">
+						<div className="card-content">
+							<form onSubmit={this.handleNickChange}>
+								<InputWithButton
+									placeholder="Nick name"
+									type="text"
+									name="nickName"
+									buttonText="Change"
+									value={this.state.nickName}
+									onChange={this.onInputChange}
+									onClick={this.handleNickChange}
+								/>
+							</form>
 						</div>
 					</div>
 				</div>
