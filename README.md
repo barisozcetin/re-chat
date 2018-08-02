@@ -8,7 +8,6 @@ https://re-chat.barisozcetin.me/
 
 ## Prerequisites
 
-What things you need to install the software and how to install them
 
 ```
 node
@@ -19,7 +18,7 @@ node
 Install the dependencies with npm or yarn
 
 ```
-`npm install`
+npm install
 ```
 
 Edit config/firebase-config-example.js to firebase-config.js and enter your Firebase info
@@ -27,13 +26,13 @@ Edit config/firebase-config-example.js to firebase-config.js and enter your Fire
 And then just run
 
 ```
-`npm start`
+npm start
 ```
 
 ## Building
 
 ```
-### `npm run build`
+npm run build
 ```
 
 ## License
