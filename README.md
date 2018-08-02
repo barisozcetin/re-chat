@@ -1,14 +1,10 @@
 # re-chat
 
-A simple chat application made with react and Firebase real time database
+A simple chat application made with React and Firebase real time database
 
 ## Live Demo
 
-https://re-chat-80204.firebaseapp.com/
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+https://re-chat.barisozcetin.me/
 
 ## Prerequisites
 
@@ -20,13 +16,13 @@ node
 
 ## Installing
 
-There is not much to do for installing. Just install dependencies with npm or yarn
+Install the dependencies with npm or yarn
 
 ```
 `npm install`
 ```
 
-Edit config/firebase-config-example.js to firebase-config.js and enter your firebase info
+Edit config/firebase-config-example.js to firebase-config.js and enter your Firebase info
 
 And then just run
 
@@ -44,16 +40,18 @@ And then just run
 
 This project is licensed under the MIT License
 
-## Languages & tools
+## Stack
 
-### Database
+* [React](http://facebook.github.io/react)
 
-- [Firebase](https://firebase.google.com) is used for real-time database
+* [Firebase](https://firebase.google.com) is used for real-time database & Authentication system.
 
-### JavaScript
+* [Bulma](https://bulma.io) Css framework is used for elements/helpers.
 
-- [React](http://facebook.github.io/react) is used for ui.
+* [re-base](https://github.com/tylermcginnis/re-base) Helps to create two-way binding between Firebase Database and application state
 
-### CSS
+## Todos / Problems
 
-- [Bulma](https://bulma.io) is used for elements/helpers.
+* Private room function is not ready yet.
+* Other authentication methods will be added.
+* PWA functions such as Offline Usage, Push Notifications, Background Sync, Standalone Install will be added
