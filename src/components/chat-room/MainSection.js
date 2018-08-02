@@ -57,7 +57,7 @@ const MainSection = (props) => {
 							}
 						}}
 					/>
-					<input type="submit" value="Send" className="button is-primary full-height" />
+					<input type="submit" disabled={props.newMessage.trim().length === 0} value="Send" className="button is-primary full-height" />
 				</form>
 			</div>
 		</div>

@@ -87,7 +87,7 @@ class RoomCreate extends Component {
 							</label>
 						</div>
 						<div className="help">
-							{!this.state.privateRoom ? 'Everybody can join the room' : 'Only invited users can join the room'}
+							{!this.state.privateRoom ? 'Everybody can join the room' : '--WORK IN PROCESS--'}
 						</div>
 					</div>
 					<input type="submit" value="Create" className="button is-primary" disabled={!this.state.roomName.length} />
