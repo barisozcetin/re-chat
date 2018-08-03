@@ -51,6 +51,6 @@ This project is licensed under the MIT License
 
 ## Todos / Problems
 
-* Private room function is not ready yet.
+* Private room function is not ready yet. 
 * Other authentication methods will be added.
 * PWA functions such as Offline Usage, Push Notifications, Background Sync, Standalone Install will be added
