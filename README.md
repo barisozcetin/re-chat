@@ -45,7 +45,7 @@ This project is licensed under the MIT License
 
 * [Firebase](https://firebase.google.com) is used for real-time database & Authentication system.
 
-* [Bulma](https://bulma.io) Css framework is used for elements/helpers.
+* [Bulma](https://bulma.io) Css framework is used for elements/helpers. Grid system is not used. CSS Grid is used instead.
 
 * [re-base](https://github.com/tylermcginnis/re-base) Helps to create two-way binding between Firebase Database and application state
 
